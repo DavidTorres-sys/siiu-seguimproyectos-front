@@ -1,4 +1,4 @@
-export interface Project {
+export interface IProject {
   code: string;
   projectName: string;
   level: string;
