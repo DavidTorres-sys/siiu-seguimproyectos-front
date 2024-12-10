@@ -3,18 +3,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-button-secondary',
   template: `
-  <button mat-raised-button 
-        class="button-secondary mat-raised-button"
-        [disabled]="disabled"
-        (click)="onClick()">
-  {{ label }}
+  <button 
+    mat-raised-button 
+    class="button-secondary"
+    (click)="onClick()">
+    <span class="label">{{ label }}</span>
   </button>
   `,
   styleUrls: ['./button-secondary.component.scss']
 })
 export class ButtonSecondaryComponent {
   @Input() label: string = 'BUTTON';
-  @Input() disabled: boolean = false;
   @Output() clicked = new EventEmitter<void>();
 
   onClick(): void {

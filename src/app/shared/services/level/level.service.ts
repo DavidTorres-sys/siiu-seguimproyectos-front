@@ -36,7 +36,6 @@ export class LevelService {
    * @returns An Observable emitting an array of `ILevel` objects.
    */
   getAll(pageSize: number, pageNumber: number): Observable<ILevel[]> {
-    // Custom headers for the HTTP request.
     const headers = {
       'message-uuid': '<uuid>',
       'request-app-id': '<uuid>',
@@ -46,6 +45,7 @@ export class LevelService {
       pageSize: pageSize.toString(),
       pageNumber: pageNumber.toString()
     };
+    console.log('Getting levels');
     return this.http.get<ILevel[]>(this.url, { headers: headers, params: params });
   }
 }

@@ -6,10 +6,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     <button 
       [type]="type" 
       mat-raised-button 
-      class="button-with-icon" 
-      [disabled]="disabled" 
       (click)="onClick()">
-      {{ label }}
+      <span class="label">{{ label }}</span>
       <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
     </button>
   `,
@@ -18,7 +16,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonPrimaryComponent {
   @Input() label: string = 'BUTTON';
   @Input() icon: string = '';
-  @Input() disabled: boolean = false;
   @Input() type: string = 'button';
   @Output() clicked = new EventEmitter<void>();
 

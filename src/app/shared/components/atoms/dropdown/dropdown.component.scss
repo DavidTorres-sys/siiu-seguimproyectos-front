@@ -1,0 +1,31 @@
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .dropdown-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333; /* Adjust color as needed */
+  }
+
+  .form-item-dropdown {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+
+    &:focus {
+      border-color: #78b82a; /* Highlight color */
+      outline: none;
+      box-shadow: 0 0 4px rgba(120, 184, 42, 0.5);
+    }
+  }
+
+  .option-style {
+    font-size: 14px;
+    padding: 8px;
+  }
+}

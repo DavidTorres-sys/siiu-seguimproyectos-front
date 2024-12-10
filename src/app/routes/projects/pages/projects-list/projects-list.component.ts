@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./projects-list.component.scss']
 })
 export class ProjectsListComponent {
+  isDisabled = false;
 
+  onSubmit() {
+    console.log('Button clicked!');
+  }
+  
 }
