@@ -1,8 +1,8 @@
 export interface ISublevel {
-  sublevelProject: number;
-  description: string;
-  id: number;
-  listWithLevels: number;
-  name: string;
-  levelType: string;
+  subnivelProyecto: number;
+  descripcion: string;
+  identificador: number;
+  listarConNiveles: number;
+  nombre: string;
+  tiponivel: string;
 }

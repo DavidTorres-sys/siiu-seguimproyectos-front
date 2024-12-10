@@ -34,7 +34,7 @@ export class TypeService {
    * @param pageNumber - The page number to fetch.
    * @returns An Observable that emits an array of `IType` objects.
    */
-  getAll(pageSize: number, pageNumber: number): Observable<IType[]> {
+  getAll(pageSize: number, pageNumber: number): Observable<any> {
     const headers = {
       'message-uuid': '<uuid>',
       'request-app-id': '<uuid>',
@@ -45,6 +45,6 @@ export class TypeService {
       pageNumber: pageNumber.toString()
     };
 
-    return this.http.get<IType[]>(this.url, { headers: headers, params: params });
+    return this.http.get(this.url, { headers: headers, params: params });
   }
 }

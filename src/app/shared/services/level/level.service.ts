@@ -35,7 +35,7 @@ export class LevelService {
    * @param pageNumber - Page number to fetch.
    * @returns An Observable emitting an array of `ILevel` objects.
    */
-  getAll(pageSize: number, pageNumber: number): Observable<ILevel[]> {
+  getAll(pageSize: number, pageNumber: number): Observable<any> {
     const headers = {
       'message-uuid': '<uuid>',
       'request-app-id': '<uuid>',
@@ -45,7 +45,6 @@ export class LevelService {
       pageSize: pageSize.toString(),
       pageNumber: pageNumber.toString()
     };
-    console.log('Getting levels');
-    return this.http.get<ILevel[]>(this.url, { headers: headers, params: params });
+    return this.http.get(this.url, { headers: headers, params: params });
   }
 }

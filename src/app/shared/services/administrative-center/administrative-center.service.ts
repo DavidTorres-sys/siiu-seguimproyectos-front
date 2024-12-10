@@ -35,7 +35,7 @@ export class AdministrativeCenterService {
    * @param pageNumber - Page number to fetch.
    * @returns An Observable emitting an array of `IAdministrativeCenter` objects.
    */
-  getAll(pageSize: number, pageNumber: number): Observable<IAdministrativeCenter[]> {
+  getAll(pageSize: number, pageNumber: number): Observable<any> {
     const headers = {
       'message-uuid': '<uuid>',
       'request-app-id': '<uuid>',
@@ -46,6 +46,6 @@ export class AdministrativeCenterService {
       pageNumber: pageNumber.toString()
     };
 
-    return this.http.get<IAdministrativeCenter[]>(this.url, { headers: headers, params: params });
+    return this.http.get(this.url, { headers: headers, params: params });
   }
 }

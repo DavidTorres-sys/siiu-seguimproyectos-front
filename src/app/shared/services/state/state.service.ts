@@ -35,7 +35,7 @@ export class StateService {
    * @param pageNumber - The page number to fetch.
    * @returns An Observable emitting an array of `IState` objects.
    */
-  getAll(pageSize: number, pageNumber: number): Observable<IState[]> {
+  getAll(pageSize: number, pageNumber: number): Observable<any> {
     const headers = {
       'message-uuid': '<uuid>',
       'request-app-id': '<uuid>',
@@ -45,6 +45,6 @@ export class StateService {
       pageSize: pageSize.toString(),
       pageNumber: pageNumber.toString()
     };
-    return this.http.get<IState[]>(this.url, { headers: headers, params: params });
+    return this.http.get(this.url, { headers: headers, params: params });
   }
 }
