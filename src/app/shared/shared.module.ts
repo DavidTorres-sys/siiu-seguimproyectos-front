@@ -27,7 +27,6 @@ import { DropdownComponent } from './components/atoms/dropdown/dropdown.componen
     HttpClientModule,
     MatIconModule,
     MatButtonModule, 
-    MatDividerModule,
   ],
   exports: [
     MatIconModule,
@@ -37,7 +36,6 @@ import { DropdownComponent } from './components/atoms/dropdown/dropdown.componen
     ButtonPrimaryComponent,
     MatIconModule,
     MatButtonModule, 
-    MatDividerModule,
     DropdownComponent,
     SidebarContentComponent
   ]

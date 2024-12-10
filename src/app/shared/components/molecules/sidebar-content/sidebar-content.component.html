@@ -1,1 +1,29 @@
-<p>sidebar-content works!</p>
+<div class="dropdowns-container">
+  <app-dropdown
+    label="Select Level"
+    id="levels-dropdown"
+    [options]="levelOptions"
+    (selectionChange)="onLevelChange($event)"
+  />
+
+  <app-dropdown
+    label="Select State"
+    id="states-dropdown"
+    [options]="stateOptions"
+    (selectionChange)="onStateChange($event)"
+  />
+
+  <app-dropdown
+    label="Select Type"
+    id="types-dropdown"
+    [options]="typeOptions"
+    (selectionChange)="onTypeChange($event)"
+  />
+
+  <app-dropdown
+    label="Select Administrative Center"
+    id="admin-centers-dropdown"
+    [options]="administrativeCenterOptions"
+    (selectionChange)="onAdministrativeCenterChange($event)"
+  />
+</div>

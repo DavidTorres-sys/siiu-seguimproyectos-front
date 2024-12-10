@@ -9,8 +9,8 @@ export class DropdownComponent {
   @Input() label: string = 'Select an option';
   @Input() id: string = 'dropdown';
   @Input() options: { value: string | number; tag: string }[] = [];
-  @Input() dropdownClass: string = ''; // Optional for custom styles
-  @Input() optionClass: string = ''; // Optional for custom option styles
+  @Input() dropdownClass: string = ''; 
+  @Input() optionClass: string = '';
   @Output() selectionChange = new EventEmitter<string | number>();
 
   onSelectionChange(event: Event): void {
