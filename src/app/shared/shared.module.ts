@@ -11,6 +11,14 @@ import { ButtonPrimaryComponent } from './components/atoms/button-primary/button
 import { SidebarContentComponent } from './components/molecules/sidebar-content/sidebar-content.component';
 import { SidebarComponent } from './components/organisms/sidebar/sidebar.component';
 import { DropdownComponent } from './components/atoms/dropdown/dropdown.component';
+import { DropdownRequiredComponent } from './components/atoms/dropdown-required/dropdown-required.component';
+
+
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -20,13 +28,15 @@ import { DropdownComponent } from './components/atoms/dropdown/dropdown.componen
     ButtonPrimaryComponent,
     SidebarContentComponent,
     SidebarComponent,
-    DropdownComponent
+    DropdownComponent,
+    DropdownRequiredComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     MatIconModule,
     MatButtonModule, 
+    MatFormFieldModule, MatSelectModule, NgFor, MatInputModule, FormsModule
   ],
   exports: [
     MatIconModule,
