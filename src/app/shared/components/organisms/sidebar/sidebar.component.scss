@@ -5,14 +5,11 @@ h1 {
 
 .container {
   height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: #fff;
 }
 
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.menu-button{
+  padding: 1em;
 }
 
 .sidenav {

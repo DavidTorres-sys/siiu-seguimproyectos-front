@@ -11,9 +11,5 @@
       <app-sidebar-buttons></app-sidebar-buttons>
     </div>
   </mat-drawer>
-  <!-- <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
-  </div> -->
+  <app-button-rounded (click)="drawer.toggle()" class="menu-button" [icon]="drawer.opened ? 'close' : 'menu'" />
 </mat-drawer-container>

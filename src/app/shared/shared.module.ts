@@ -21,6 +21,8 @@ import { DropdownRequiredComponent } from './components/atoms/dropdown-required/
 import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/sidebar-buttons.component';
 import { TableComponent } from './components/molecules/table/table.component';
 import { MatTableModule } from '@angular/material/table';
+import { ProjectsTableComponent } from './components/organisms/projects-table/projects-table.component';
+import { ButtonRoundedComponent } from './components/atoms/button-rounded/button-rounded.component';
 @NgModule({
   declarations: [
     AlertComponent,
@@ -32,7 +34,9 @@ import { MatTableModule } from '@angular/material/table';
     DropdownComponent,
     DropdownRequiredComponent,
     SidebarButtonsComponent,
-    TableComponent
+    TableComponent,
+    ProjectsTableComponent,
+    ButtonRoundedComponent,
   ],
   imports: [
     CommonModule,
@@ -59,8 +63,7 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatButtonModule, 
     DropdownComponent,
-    SidebarContentComponent,
-    SidebarComponent,
+    ProjectsTableComponent
   ]
 })
 export class SharedModule { }

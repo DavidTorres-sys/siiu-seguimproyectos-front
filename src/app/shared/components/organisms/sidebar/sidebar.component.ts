@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +7,21 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  isSmallScreen: boolean = false;
+  isSmallScreen = false;
+  drawerOpened = false; // Track whether the sidebar is opened
 
+  constructor(private breakpointObserver: BreakpointObserver) { }
+  
   ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+      if (!this.isSmallScreen) this.drawerOpened = true; // Default to always open for large screens
+    });
     this.checkScreenSize();
+  }
+
+  toggleDrawer(): void {
+    this.drawerOpened = !this.drawerOpened;
   }
 
   onSubmit() {
