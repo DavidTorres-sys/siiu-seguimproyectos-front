@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { IAdministrativeCenter } from 'src/app/core/interfaces/IAdministrativeCenter';
 import { ILevel } from 'src/app/core/interfaces/ILevel';
 import { IProject } from 'src/app/core/interfaces/IProject';
@@ -16,11 +17,11 @@ import { TypeService } from 'src/app/shared/services/type/type.service';
   styleUrls: ['./sidebar-content.component.scss']
 })
 export class SidebarContentComponent implements OnInit {
-  levels: ILevel[] = [];
-  projects: IProject[] = [];
-  states: IState[] = [];
-  types: IType[] = [];
-  administrativeCenters: IAdministrativeCenter[] = [];
+  levelOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  projectOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  statesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  typesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  administrativeCentersOptions$!: Observable<{ value: string | number; tag: string; }[]>;
 
   constructor(
     private levelSvc: LevelService,
@@ -31,18 +32,38 @@ export class SidebarContentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.levelSvc.getAll(100, 1).subscribe((response) => {
-      this.levels = response.data.niveles;
-    });
-    this.stateSvc.getAll(100, 1).subscribe((response) => {
-      this.states = response.data.estados;
-    });
-    this.typeSvc.getAll(100, 1).subscribe((response) => {
-      this.types = response.data.tipos;
-    });
-    this.administrativeCenterSvc.getAll(100, 1).subscribe((response) => {
-      this.administrativeCenters = response.data.centrosAdministrativos;
-    });
+    this.levelOptions$ = this.levelSvc.getAll(100, 1).pipe(
+      map(response =>
+        response.data.niveles.map((level: any) => ({
+          value: level.identificador,
+          tag: level.nombre
+        }))
+      )
+    );
+    this.statesOptions$ = this.stateSvc.getAll(100, 1).pipe(
+      map(response =>
+        response.data.estados.map((state: any) => ({
+          value: state.value,
+          tag: state.tag
+        }))
+      )
+    );
+    this.typesOptions$ = this.typeSvc.getAll(100, 1).pipe(
+      map(response =>
+        response.data.tipos.map((type: any) => ({
+          value: type.identificador,
+          tag: type.nombre
+        }))
+      )
+    );
+    this.administrativeCentersOptions$ = this.administrativeCenterSvc.getAll(100, 1).pipe(
+      map(response =>
+        response.data.centrosAdministrativos.map((center: any) => ({
+          value: center.identificador,
+          tag: center.nombre
+        }))
+      )
+    );
   }
 
   onLevelChange(selectedLevel: string | number): void {
@@ -60,34 +81,4 @@ export class SidebarContentComponent implements OnInit {
   onAdministrativeCenterChange(selectedCenter: string | number): void {
     console.log('Selected Administrative Center:', selectedCenter);
   }
-
-  get levelOptions() {
-    return this.levels.map(level => ({
-      value: level.identificador,
-      tag: level.nombre
-    }));
-  }
-
-  get stateOptions() {
-    return this.states.map(state => ({
-      value: state.value,
-      tag: state.tag
-    }));
-  }
-
-  get typeOptions() {
-    return this.types.map(type => ({
-      value: type.identificador,
-      tag: type.nombre
-    }));
-  }
-
-  get administrativeCenterOptions() {
-    return this.administrativeCenters.map(center => ({
-      value: center.identificador,
-      tag: center.nombre
-    }));
-  }
-  
-
 }

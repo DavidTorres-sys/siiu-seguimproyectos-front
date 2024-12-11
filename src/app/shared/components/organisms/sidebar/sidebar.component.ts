@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   isDisabled = false;
+  showFiller = false;
 
   onSubmit() {
     console.log('Button clicked!');

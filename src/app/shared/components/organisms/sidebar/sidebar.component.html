@@ -1,4 +1,15 @@
-<div class="margin-right">
-  <app-button-secondary [label]="'LIMPIAR FILTROS'" (clicked)="onSubmit()"/>
-  <app-button-primary [label]="'CONSULTAR'" [icon]="'search'" [type]="'button'" (clicked)="onSubmit()"/>
-</div>
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <h1>Seguimiento de proyectos</h1>
+    <app-sidebar-content />
+    <app-button-secondary [label]="'LIMPIAR FILTROS'" (clicked)="onSubmit()" />
+    <app-button-primary [label]="'CONSULTAR'" [icon]="'search'" [type]="'button'" (clicked)="onSubmit()" />
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>
+
+</mat-drawer-container>

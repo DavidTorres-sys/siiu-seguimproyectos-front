@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';;
+import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import { AlertComponent } from './components/atoms/alert/alert.component';
 import { InputTextComponent } from './components/atoms/input-text/input-text.component';
@@ -36,7 +36,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HttpClientModule,
     MatIconModule,
     MatButtonModule, 
-    MatFormFieldModule, MatSelectModule, NgFor, MatInputModule, FormsModule
+    MatFormFieldModule, 
+    MatSelectModule, 
+    NgFor, 
+    MatInputModule, 
+    FormsModule,
+    MatSidenavModule, 
+    NgIf,
   ],
   exports: [
     MatIconModule,
@@ -47,7 +53,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatButtonModule, 
     DropdownComponent,
-    SidebarContentComponent
+    SidebarContentComponent,
+    SidebarComponent,
   ]
 })
 export class SharedModule { }

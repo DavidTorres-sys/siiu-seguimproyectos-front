@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-text',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./input-text.component.scss']
 })
 export class InputTextComponent {
-
+  @Input() label!: string;
+  @Output() selectionChange = new EventEmitter<string | number>();
+  
+  onSelectionChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectionChange.emit(value);
+  }
 }
