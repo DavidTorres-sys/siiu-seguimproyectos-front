@@ -24,6 +24,9 @@ h1 {
   margin-bottom: 1em;
 }
 
-.buttons {
-  
+/* Responsive styles */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 80vw; /* Reduce the width of the sidenav in smaller screens */
+  }
 }
