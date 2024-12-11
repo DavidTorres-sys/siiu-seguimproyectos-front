@@ -19,6 +19,8 @@ import { SidebarComponent } from './components/organisms/sidebar/sidebar.compone
 import { DropdownComponent } from './components/atoms/dropdown/dropdown.component';
 import { DropdownRequiredComponent } from './components/atoms/dropdown-required/dropdown-required.component';
 import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/sidebar-buttons.component';
+import { TableComponent } from './components/molecules/table/table.component';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AlertComponent,
@@ -29,7 +31,8 @@ import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/
     SidebarComponent,
     DropdownComponent,
     DropdownRequiredComponent,
-    SidebarButtonsComponent
+    SidebarButtonsComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/
     FormsModule,
     MatSidenavModule, 
     NgIf,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ],
   exports: [
     MatIconModule,
