@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';;
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
@@ -47,7 +47,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSidenavModule, 
     NgIf,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatIconModule,
