@@ -25,12 +25,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-button-primary',
   template: `
-    <button 
-      [type]="type" 
-      mat-raised-button 
-      (click)="onClick()">
+    <button mat-raised-button class="button-primary" [type]="type" (click)="onClick()">
       <span class="label">{{ label }}</span>
-      <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+      <mat-icon *ngIf="icon" class="icon">{{ icon }}</mat-icon>
     </button>
   `,
   styleUrls: ['./button-primary.component.scss'],

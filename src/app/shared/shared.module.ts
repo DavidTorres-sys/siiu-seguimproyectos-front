@@ -18,6 +18,7 @@ import { SidebarContentComponent } from './components/molecules/sidebar-content/
 import { SidebarComponent } from './components/organisms/sidebar/sidebar.component';
 import { DropdownComponent } from './components/atoms/dropdown/dropdown.component';
 import { DropdownRequiredComponent } from './components/atoms/dropdown-required/dropdown-required.component';
+import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/sidebar-buttons.component';
 @NgModule({
   declarations: [
     AlertComponent,
@@ -27,7 +28,8 @@ import { DropdownRequiredComponent } from './components/atoms/dropdown-required/
     SidebarContentComponent,
     SidebarComponent,
     DropdownComponent,
-    DropdownRequiredComponent
+    DropdownRequiredComponent,
+    SidebarButtonsComponent
   ],
   imports: [
     CommonModule,
