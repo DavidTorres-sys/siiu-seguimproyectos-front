@@ -1,0 +1,26 @@
+mat-card {
+  display: flex; /* Configura el contenedor como un flexbox */
+  flex-direction: row; /* Asegura la disposición horizontal */
+  align-items: center; /* Centra verticalmente el ícono y el texto */
+  padding: 1em;
+  border: 1px solid #e6dba4; /* Borde amarillo claro */
+  border-radius: 4px;
+  background-color: #fcf8e3; /* Fondo amarillo claro */
+  color: #6b4e00; /* Color del texto */
+  font-size: 14px;
+  box-shadow: none; /* Sin sombras */
+}
+
+.alert-icon {
+  color: #ffca28; /* Color amarillo del ícono */
+  margin-right: 8px; /* Espaciado entre el ícono y el texto */
+  font-size: 30px; /* Tamaño del ícono */
+  display: flex; /* Asegura que el ícono respete el layout flex */
+  align-items: center; /* Centra el contenido del ícono verticalmente */
+}
+
+.alert-label {
+  flex: 1; /* Asegura que el texto use el espacio restante */
+  font-size: 14px;
+  white-space: nowrap; /* Evita el salto de línea */
+}
