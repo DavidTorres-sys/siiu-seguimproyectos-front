@@ -8,22 +8,30 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
  * 
  * Inputs:
  * - `label` (string): The label displayed next to the text input (required).
+ * - `formControlName` (string): The name of the form control associated with the input (required).
  * 
  * Outputs:
  * - `selectionChange` (EventEmitter<string | number>): Emits the value of the input whenever it changes.
  * 
  * Usage Example:
  * <app-input-text 
- *   label="Enter your name" 
+ *   label="Enter your name"
+ *   formControlName="nameInput"
  *   (selectionChange)="onInputChange($event)">
  * </app-input-text>
  */
 @Component({
   selector: 'app-input-text',
-  templateUrl: './input-text.component.html',
+  template: `
+  <mat-form-field>
+    <mat-label formControlName="{{ formControlName }}">{{ label }}</mat-label>
+    <input matInput (change)="onSelectionChange($event)">
+  </mat-form-field>
+  `,
   styleUrls: ['./input-text.component.scss'],
 })
 export class InputTextComponent {
+
   /**
    * The label displayed next to the text input.
    * This input is required and should be passed by the parent component.
@@ -31,10 +39,18 @@ export class InputTextComponent {
   @Input() label!: string;
 
   /**
+   * The name of the form control associated with the input.
+   * This input is required and should be passed by the parent component.
+   */
+  @Input() formControlName!: string;
+
+  /**
    * Event emitted whenever the input value changes.
    * The emitted value is the current value of the input.
    */
   @Output() selectionChange = new EventEmitter<string | number>();
+
+  constructor() { }
 
   /**
    * Handles the input change event and emits the new value.

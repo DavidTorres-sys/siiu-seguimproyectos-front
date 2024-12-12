@@ -27,6 +27,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['code', 'project', 'state', 'calls', 'responsable', 'ip', 'projectType', 'actions'];
   dataSource = ELEMENT_DATA;
 }

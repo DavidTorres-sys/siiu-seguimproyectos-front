@@ -1,10 +1,40 @@
-/* Contenedor principal */
 .container {
+  display: flex;
   height: 100vh;
+  flex-wrap: wrap;
 }
 
-/* Sidebar en su tamaño por defecto */
+h1 {
+  font-size: 1.2em;
+  margin: 0;
+  font-weight: normal;
+}
+
+
 .sidebar {
+  background-color: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.content {
+  flex-grow: 1;
+  background-color: #fff;
+  overflow: auto;
   margin-right: 1em;
 }
 
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .content {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+  }
+}
