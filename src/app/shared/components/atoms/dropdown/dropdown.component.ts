@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DropdownRequiredComponent } from '../dropdown-required/dropdown-required.component';
 
 /**
  * DropdownComponent
@@ -25,10 +27,27 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
  */
 @Component({
   selector: 'app-dropdown',
-  templateUrl: './dropdown.component.html',
+  template: `
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ label }}</mat-label>
+      <mat-select>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          {{ option.tag }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  `,
   styleUrls: ['./dropdown.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DropdownComponent),
+      multi: true,
+    },
+  ],
 })
-export class DropdownComponent {
+export class DropdownComponent implements ControlValueAccessor {
   /**
    * The label for the dropdown.
    * Default: 'Select an option'.
@@ -52,7 +71,7 @@ export class DropdownComponent {
    * Additional class(es) to apply to the dropdown element.
    * This input is optional.
    */
-  @Input() dropdownClass: string = ''; 
+  @Input() dropdownClass: string = '';
 
   /**
    * Additional class(es) to apply to the option elements.
@@ -66,12 +85,44 @@ export class DropdownComponent {
    */
   @Output() selectionChange = new EventEmitter<string | number>();
 
+  value: string | number | null = null;
+
+  // Callbacks for ControlValueAccessor
+  onChange = (value: any) => { };
+  onTouched = () => { };
+
+  /**
+   * Writes a new value to the input field.
+   * @param value The new value to set.
+   */
+  writeValue(value: any): void {
+    this.value = value || null;
+  }
+
+  /**
+   * Registers a function to call when the input value changes.
+   * @param fn The callback function.
+   */
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * Registers a function to call when the input is touched (blur event).
+   * @param fn The callback function.
+   */
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
   /**
    * Handles the selection change event from the dropdown and emits the selected value.
    * @param event The change event triggered by the dropdown.
    */
-  onSelectionChange(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
+  onSelectionChange(event: any): void {
+    const value = event.value;
+    this.value = value;
+    this.onChange(value);
     this.selectionChange.emit(value);
   }
 }

@@ -3,18 +3,20 @@
     <form [formGroup]="form">
       <app-input-text label="Código Proyecto" id="project-code-id" formControlName="projectCode" />
 
-      <app-dropdown-required label="Centro de Gestión" id="management-center-dropdown" formControlName="managementCenter" 
-      [options]="(levelOptions$ | async) || []" />
+      <app-dropdown-required label="Centro de Gestión" id="management-center-dropdown"
+        formControlName="managementCenter" [options]="(levelOptions$ | async) || []" />
 
-      <app-dropdown label="Estado" id="states-dropdown" [options]="(statesOptions$ | async) || []" />
+      <app-dropdown label="Estado" id="states-dropdown" formControlName="state"
+        [options]="(statesOptions$ | async) || []" />
 
-      <app-dropdown label="Convocatoria" id="admin-centers-dropdown"
+      <app-dropdown label="Convocatoria" id="calls-dropdown" formControlName="calls"
         [options]="(administrativeCentersOptions$ | async) || []" />
 
-      <app-dropdown label="Proceso de Selección" id="admin-centers-dropdown"
+      <app-dropdown label="Proceso de Selección" id="selection-process-dropdown" formControlName="selectionProcess"
         [options]="(administrativeCentersOptions$ | async) || []" />
 
-      <app-dropdown label="Tipo de Proyecto" id="types-dropdown" [options]="(typesOptions$ | async) || []" />
+      <app-dropdown label="Tipo de Proyecto" id="project-yype-dropdown" formControlName="projectType"
+      [options]="(typesOptions$ | async) || []" />
 
       <div class="button-container">
         <app-button-secondary [label]="'LIMPIAR FILTROS'" (click)="onClearFilters()" />

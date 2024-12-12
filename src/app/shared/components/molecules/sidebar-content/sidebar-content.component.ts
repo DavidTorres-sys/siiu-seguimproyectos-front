@@ -33,11 +33,15 @@ export class SidebarContentComponent implements OnInit {
     private stateSvc: StateService,
     private typeSvc: TypeService,
     private administrativeCenterSvc: AdministrativeCenterService,
-  ) { 
+  ) {
     this.form = this.fb.group({
       projectCode: [''],
       managementCenter: ['', Validators.required],
-    });  
+      state: [''],
+      calls: [''],
+      selectionProcess: [''],
+      projectType: [''],
+    });
   }
 
   ngOnInit(): void {

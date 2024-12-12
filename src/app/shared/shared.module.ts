@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,8 +23,9 @@ import { DropdownRequiredComponent } from './components/atoms/dropdown-required/
 import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/sidebar-buttons.component';
 import { TableComponent } from './components/molecules/table/table.component';
 import { MatTableModule } from '@angular/material/table';
-import { ProjectsTableComponent } from './components/organisms/projects-table/projects-table.component';
 import { ButtonRoundedComponent } from './components/atoms/button-rounded/button-rounded.component';
+import { MenuComponent } from './components/atoms/menu/menu.component';
+import { PaginationComponent } from './components/atoms/pagination/pagination.component';
 @NgModule({
   declarations: [
     AlertComponent,
@@ -35,8 +38,9 @@ import { ButtonRoundedComponent } from './components/atoms/button-rounded/button
     DropdownRequiredComponent,
     SidebarButtonsComponent,
     TableComponent,
-    ProjectsTableComponent,
     ButtonRoundedComponent,
+    MenuComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
@@ -45,10 +49,12 @@ import { ButtonRoundedComponent } from './components/atoms/button-rounded/button
     MatButtonModule, 
     MatFormFieldModule, 
     MatSelectModule, 
+    MatMenuModule,
     NgFor, 
     MatInputModule, 
     FormsModule,
-    MatSidenavModule, 
+    MatSidenavModule,
+    MatPaginatorModule, 
     NgIf,
     MatCardModule,
     MatTableModule,
@@ -56,14 +62,10 @@ import { ButtonRoundedComponent } from './components/atoms/button-rounded/button
   ],
   exports: [
     MatIconModule,
-    AlertComponent,
-    InputTextComponent,
-    ButtonSecondaryComponent,
-    ButtonPrimaryComponent,
     MatIconModule,
     MatButtonModule, 
-    DropdownComponent,
-    ProjectsTableComponent
+    SidebarComponent,
+    TableComponent,
   ]
 })
 export class SharedModule { }
