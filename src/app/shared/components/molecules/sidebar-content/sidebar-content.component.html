@@ -1,22 +1,25 @@
 <ng-container class="dropdowns-container">
   <div class="form-group">
-    <app-input-text label="Código Proyecto" id="search-input" />
+    <form [formGroup]="form">
+      <app-input-text label="Código Proyecto" id="project-code-id" formControlName="projectCode" />
 
-    <app-dropdown-required label="Centro de Gestión" id="levels-dropdown" [options]="(levelOptions$ | async) || []"
-      (selectionChange)="onLevelChange($event)" />
+      <app-dropdown-required label="Centro de Gestión" id="management-center-dropdown" formControlName="managementCenter" 
+      [options]="(levelOptions$ | async) || []" />
 
-    <app-dropdown label="Estado" id="states-dropdown" [options]="(statesOptions$ | async) || []"
-      (selectionChange)="onStateChange($event)" />
+      <app-dropdown label="Estado" id="states-dropdown" [options]="(statesOptions$ | async) || []" />
 
-    <app-dropdown label="Convocatoria" id="admin-centers-dropdown"
-      [options]="(administrativeCentersOptions$ | async) || []"
-      (selectionChange)="onAdministrativeCenterChange($event)" />
+      <app-dropdown label="Convocatoria" id="admin-centers-dropdown"
+        [options]="(administrativeCentersOptions$ | async) || []" />
 
-    <app-dropdown label="Proceso de selección" id="admin-centers-dropdown"
-      [options]="(administrativeCentersOptions$ | async) || []"
-      (selectionChange)="onAdministrativeCenterChange($event)" />
+      <app-dropdown label="Proceso de Selección" id="admin-centers-dropdown"
+        [options]="(administrativeCentersOptions$ | async) || []" />
 
-    <app-dropdown label="Tipo de Proyecto" id="types-dropdown" [options]="(typesOptions$ | async) || []"
-      (selectionChange)="onTypeChange($event)" />
+      <app-dropdown label="Tipo de Proyecto" id="types-dropdown" [options]="(typesOptions$ | async) || []" />
+
+      <div class="button-container">
+        <app-button-secondary [label]="'LIMPIAR FILTROS'" (click)="onClearFilters()" />
+        <app-button-primary [label]="'CONSULTAR'" [icon]="'search'" [type]="'button'" (click)="onSubmit()" />
+      </div>
+    </form>
   </div>
 </ng-container>

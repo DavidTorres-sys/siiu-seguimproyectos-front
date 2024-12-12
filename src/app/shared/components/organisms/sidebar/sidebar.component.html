@@ -7,9 +7,6 @@
     <div class="content">
       <app-sidebar-content></app-sidebar-content>
     </div>
-    <div class="buttons">
-      <app-sidebar-buttons></app-sidebar-buttons>
-    </div>
   </mat-drawer>
   <app-button-rounded (click)="drawer.toggle()" class="menu-button" [icon]="drawer.opened ? 'close' : 'menu'" />
 </mat-drawer-container>

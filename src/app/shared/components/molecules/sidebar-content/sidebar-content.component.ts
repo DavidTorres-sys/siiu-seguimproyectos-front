@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { IAdministrativeCenter } from 'src/app/core/interfaces/IAdministrativeCenter';
 import { ILevel } from 'src/app/core/interfaces/ILevel';
@@ -10,6 +11,7 @@ import { LevelService } from 'src/app/shared/services/level/level.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { StateService } from 'src/app/shared/services/state/state.service';
 import { TypeService } from 'src/app/shared/services/type/type.service';
+import { InputTextComponent } from '../../atoms/input-text/input-text.component';
 
 @Component({
   selector: 'app-sidebar-content',
@@ -17,6 +19,7 @@ import { TypeService } from 'src/app/shared/services/type/type.service';
   styleUrls: ['./sidebar-content.component.scss']
 })
 export class SidebarContentComponent implements OnInit {
+  form!: FormGroup;
   levelOptions$!: Observable<{ value: string | number; tag: string; }[]>;
   projectOptions$!: Observable<{ value: string | number; tag: string; }[]>;
   statesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
@@ -24,12 +27,18 @@ export class SidebarContentComponent implements OnInit {
   administrativeCentersOptions$!: Observable<{ value: string | number; tag: string; }[]>;
 
   constructor(
+    private fb: FormBuilder,
     private levelSvc: LevelService,
     private projectSvc: ProjectService,
     private stateSvc: StateService,
     private typeSvc: TypeService,
     private administrativeCenterSvc: AdministrativeCenterService,
-  ) { }
+  ) { 
+    this.form = this.fb.group({
+      projectCode: [''],
+      managementCenter: ['', Validators.required],
+    });  
+  }
 
   ngOnInit(): void {
     this.levelOptions$ = this.levelSvc.getAll(100, 1).pipe(
@@ -66,19 +75,17 @@ export class SidebarContentComponent implements OnInit {
     );
   }
 
-  onLevelChange(selectedLevel: string | number): void {
-    console.log('Selected Level:', selectedLevel);
+  // Emit form values when CONSULTAR is clicked
+  onSubmit(): void {
+    const formValues = this.form.value;
+    console.log('Form submitted with values:', formValues);
+
+    // Optionally, emit the projectCode or the entire form values
+    const projectCode = formValues.projectCode;
   }
 
-  onStateChange(selectedState: string | number): void {
-    console.log('Selected State:', selectedState);
-  }
-
-  onTypeChange(selectedType: string | number): void {
-    console.log('Selected Type:', selectedType);
-  }
-
-  onAdministrativeCenterChange(selectedCenter: string | number): void {
-    console.log('Selected Administrative Center:', selectedCenter);
+  // Optional: Clear form filters when LIMPIAR FILTROS is clicked
+  onClearFilters(): void {
+    this.form.reset();
   }
 }
