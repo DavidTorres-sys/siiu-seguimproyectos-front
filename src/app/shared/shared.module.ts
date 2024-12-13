@@ -21,11 +21,14 @@ import { SidebarComponent } from './components/organisms/sidebar/sidebar.compone
 import { DropdownComponent } from './components/atoms/dropdown/dropdown.component';
 import { DropdownRequiredComponent } from './components/atoms/dropdown-required/dropdown-required.component';
 import { SidebarButtonsComponent } from './components/molecules/sidebar-buttons/sidebar-buttons.component';
-import { TableComponent } from './components/molecules/table/table.component';
+import { TableComponent } from './components/organisms/table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { ButtonRoundedComponent } from './components/atoms/button-rounded/button-rounded.component';
 import { MenuComponent } from './components/atoms/menu/menu.component';
 import { PaginationComponent } from './components/atoms/pagination/pagination.component';
+import { FooterComponent } from './components/molecules/footer/footer.component';
+import { StatusComponent } from './components/atoms/status/status.component';
+import { StatusIndicatorComponent } from './components/molecules/status-indicator/status-indicator.component';
 @NgModule({
   declarations: [
     AlertComponent,
@@ -41,6 +44,9 @@ import { PaginationComponent } from './components/atoms/pagination/pagination.co
     ButtonRoundedComponent,
     MenuComponent,
     PaginationComponent,
+    FooterComponent,
+    StatusComponent,
+    StatusIndicatorComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +72,7 @@ import { PaginationComponent } from './components/atoms/pagination/pagination.co
     MatButtonModule, 
     SidebarComponent,
     TableComponent,
+    FooterComponent,
   ]
 })
 export class SharedModule { }

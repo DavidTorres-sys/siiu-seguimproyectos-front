@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+// Temporal, mock data
 export interface PeriodicElement {
   code: number;
   project: string;
@@ -13,7 +14,7 @@ export interface PeriodicElement {
   actions: string;
 }
 const ELEMENT_DATA: PeriodicElement[] = [];
-for (let i = 1; i <= 50; i++) {
+for (let i = 1; i <= 80; i++) {
   ELEMENT_DATA.push({
     code: i,
     project: `Project ${i}`,
@@ -48,6 +49,10 @@ export class TableComponent implements AfterViewInit {
       action: () => this.checkVoicemail(),
     },
   ];
+
+  get projectsNumber(): number {
+    return this.dataSource.data.length;
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
