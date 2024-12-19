@@ -30,8 +30,8 @@ import { DropdownRequiredComponent } from '../dropdown-required/dropdown-require
   template: `
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>{{ label }}</mat-label>
-      <mat-select>
-        <mat-option>--</mat-option>
+      <mat-select [value]="value" (selectionChange)="onSelectionChange($event)">
+        <mat-option [value]="null">--</mat-option>
         <mat-option *ngFor="let option of options" [value]="option.value">
           {{ option.tag }}
         </mat-option>
@@ -50,38 +50,21 @@ import { DropdownRequiredComponent } from '../dropdown-required/dropdown-require
 export class DropdownComponent implements ControlValueAccessor {
   /**
    * The label for the dropdown.
-   * Default: 'Select an option'.
    */
   @Input() label: string = 'Select an option';
 
   /**
    * The unique identifier for the dropdown element.
-   * Default: 'dropdown'.
    */
   @Input() id: string = 'dropdown';
 
   /**
    * An array of options to display in the dropdown.
-   * Each option must have a `value` and a `tag`.
-   * Default: an empty array.
    */
   @Input() options: { value: string | number; tag: string }[] = [];
 
   /**
-   * Additional class(es) to apply to the dropdown element.
-   * This input is optional.
-   */
-  @Input() dropdownClass: string = '';
-
-  /**
-   * Additional class(es) to apply to the option elements.
-   * This input is optional.
-   */
-  @Input() optionClass: string = '';
-
-  /**
    * Event emitted when the selected option changes.
-   * Emits the `value` of the selected option.
    */
   @Output() selectionChange = new EventEmitter<string | number>();
 

@@ -4,19 +4,19 @@
       <app-input-text label="Código Proyecto" id="project-code-id" formControlName="projectCode" />
 
       <app-dropdown-required label="Centro de Gestión" id="management-center-dropdown"
-        formControlName="managementCenter" [options]="(levelOptions$ | async) || []" />
+        formControlName="managementCenter" [options]="(administrativeCentersOptions$ | async) || []" />
 
       <app-dropdown label="Estado" id="states-dropdown" formControlName="state"
-        [options]="(statesOptions$ | async) || []" />
+        [options]="(statusByUserOptions$ | async) || []" />
 
-      <app-dropdown label="Convocatoria" id="calls-dropdown" formControlName="calls"
-        [options]="(administrativeCentersOptions$ | async) || []" />
+      <app-dropdown label="Convocatoria" id="calls-dropdown" formControlName="announcement"
+        [options]="(announcementOptions$ | async) || []" />
 
       <app-dropdown label="Proceso de Selección" id="selection-process-dropdown" formControlName="selectionProcess"
-        [options]="(administrativeCentersOptions$ | async) || []" />
+        [options]="(filterProccessSelectionOptions$ | async) || []" />
 
       <app-dropdown label="Tipo de Proyecto" id="project-yype-dropdown" formControlName="projectType"
-      [options]="(typesOptions$ | async) || []" />
+      [options]="(projectTypeOptions$ | async) || []" />
 
       <div class="button-container">
         <app-button-secondary [label]="'LIMPIAR FILTROS'" (click)="onClearFilters()" />

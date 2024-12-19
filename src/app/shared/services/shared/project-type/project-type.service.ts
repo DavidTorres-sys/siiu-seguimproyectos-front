@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IType } from 'src/app/core/interfaces/IType';
+import { ENDPOINTS } from 'src/app/utils/url/endpoints-url';
 
 /**
- * Service class for managing operations related to types.
+ * Service class for managing operations related to project types.
  * 
  * This service provides methods to interact with the backend for fetching
  * and managing type-related data. It is provided at the root level of the Angular
@@ -14,9 +14,9 @@ import { IType } from 'src/app/core/interfaces/IType';
 @Injectable({
   providedIn: 'root'
 })
-export class TypeService {
+export class ProjectTypeService {
 
-  private url = `${environment.route}tipos`;
+  private url = `${environment.route}/${ENDPOINTS.SHARED_URL.PROJECT_TYPES_LIST}`;
 
   /**
    * Constructor to inject the HttpClient dependency for performing HTTP requests.

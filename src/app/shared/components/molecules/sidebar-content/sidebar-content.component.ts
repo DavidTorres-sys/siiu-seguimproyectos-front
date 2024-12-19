@@ -6,12 +6,12 @@ import { ILevel } from 'src/app/core/interfaces/ILevel';
 import { IProject } from 'src/app/core/interfaces/IProject';
 import { IState } from 'src/app/core/interfaces/IState';
 import { IType } from 'src/app/core/interfaces/IType';
-import { AdministrativeCenterService } from 'src/app/shared/services/administrative-center/administrative-center.service';
-import { LevelService } from 'src/app/shared/services/level/level.service';
-import { ProjectService } from 'src/app/shared/services/project/project.service';
-import { StateService } from 'src/app/shared/services/state/state.service';
-import { TypeService } from 'src/app/shared/services/type/type.service';
+import { AdministrativeCenterService } from 'src/app/shared/services/shared/administrative-center/administrative-center.service';
+import { ProjectTypeService } from 'src/app/shared/services/shared/project-type/project-type.service';
 import { InputTextComponent } from '../../atoms/input-text/input-text.component';
+import { FilterProcessSelectionService } from 'src/app/shared/services/admin/filterProcessSelection/filter-process-selection.service';
+import { StatusByUserService } from 'src/app/shared/services/project/status/status-by-user.service';
+import { AnnouncementService } from 'src/app/shared/services/announcement/announcement/announcement.service';
 
 @Component({
   selector: 'app-sidebar-content',
@@ -20,63 +20,72 @@ import { InputTextComponent } from '../../atoms/input-text/input-text.component'
 })
 export class SidebarContentComponent implements OnInit {
   form!: FormGroup;
-  levelOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  projectOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  statesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  typesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  projectTypeOptions$!: Observable<{ value: string | number; tag: string; }[]>;
   administrativeCentersOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  filterProccessSelectionOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  announcementOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  statusByUserOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  typesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
 
   constructor(
     private fb: FormBuilder,
-    private levelSvc: LevelService,
-    private projectSvc: ProjectService,
-    private stateSvc: StateService,
-    private typeSvc: TypeService,
+    private projectTypeSvc: ProjectTypeService,
     private administrativeCenterSvc: AdministrativeCenterService,
+    private filterProcessSelectionSvc: FilterProcessSelectionService,
+    private statusByUserSvc: StatusByUserService,
+    private announcementSvc: AnnouncementService,
   ) {
     this.form = this.fb.group({
       projectCode: [''],
       managementCenter: ['', Validators.required],
       state: [''],
-      calls: [''],
+      announcement: [''],
       selectionProcess: [''],
       projectType: [''],
     });
   }
 
   ngOnInit(): void {
-    this.levelOptions$ = this.levelSvc.getAll(100, 1).pipe(
+    this.projectTypeOptions$ = this.projectTypeSvc.getAll(100, 1).pipe(
       map(response =>
-        response.data.niveles.map((level: any) => ({
-          value: level.identificador,
-          tag: level.nombre
+        response.map((level: any) => ({
+          value: level.id,
+          tag: level.name
         }))
       )
     );
-    this.statesOptions$ = this.stateSvc.getAll(100, 1).pipe(
+    this.administrativeCentersOptions$ = this.administrativeCenterSvc.getAll(200, 200).pipe(
       map(response =>
-        response.data.estados.map((state: any) => ({
-          value: state.value,
-          tag: state.tag
+        response.map((state: any) => ({
+          value: state.id,
+          tag: state.shortName
         }))
       )
     );
-    this.typesOptions$ = this.typeSvc.getAll(100, 1).pipe(
+    this.announcementOptions$ = this.announcementSvc.getAll(100, 1).pipe(
       map(response =>
-        response.data.tipos.map((type: any) => ({
-          value: type.identificador,
-          tag: type.nombre
+        response.map((type: any) => ({
+          value: type.id,
+          tag: type.name
         }))
       )
     );
-    this.administrativeCentersOptions$ = this.administrativeCenterSvc.getAll(100, 1).pipe(
-      map(response =>
-        response.data.centrosAdministrativos.map((center: any) => ({
-          value: center.identificador,
-          tag: center.nombre
-        }))
-      )
-    );
+    // this.filterProccessSelectionOptions$ = this.filterProcessSelectionSvc.getAll(100, 1).pipe(
+    //   map(response =>
+    //     response.map((type: any) => ({
+    //       value: type.id,
+    //       tag: type.name
+    //     }))
+    //   )
+    // );
+    // this.statusByUserOptions$ = this.statusByUserSvc.getAll(100, 1).pipe(
+    //   map(response =>
+    //     response.data.centrosAdministrativos.map((center: any) => ({
+    //       value: center.identificador,
+    //       tag: center.nombre
+    //     }))
+    //   )
+    // );
   }
 
   // Emit form values when CONSULTAR is clicked

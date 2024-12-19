@@ -1,22 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ILevel } from 'src/app/core/interfaces/ILevel';
 import { environment } from 'src/environments/environment';
+import { ENDPOINTS } from 'src/app/utils/url/endpoints-url';
 
 /**
- * Service class for managing operations related to levels.
+ * Service class for managing operations related to administrative centers.
  * 
  * This service provides methods to interact with the backend for fetching
- * and managing level-related data. It is available application-wide due to
+ * and managing administrative center data. It is available application-wide due to
  * its root-level provider configuration.
  */
 @Injectable({
   providedIn: 'root'
 })
-export class LevelService {
+export class AdministrativeCenterService {
 
-  private url = `${environment.route}niveles`;
+  private url = `${environment.route}/${ENDPOINTS.SHARED_URL.ADMINISTRATIVE_CENTER_LIST}`;
 
   /**
    * Constructor to inject the HttpClient dependency for making HTTP requests.
@@ -26,14 +26,14 @@ export class LevelService {
   constructor(private http: HttpClient) { }
 
   /**
-   * Fetches a paginated list of levels from the API.
+   * Fetches a paginated list of administrative centers from the API.
    * 
    * This method sends a GET request to the backend API with pagination parameters
-   * and custom headers to retrieve level data.
+   * and custom headers to retrieve data for administrative centers.
    * 
-   * @param pageSize - Number of levels to retrieve per page.
+   * @param pageSize - Number of administrative centers to retrieve per page.
    * @param pageNumber - Page number to fetch.
-   * @returns An Observable emitting an array of `ILevel` objects.
+   * @returns An Observable emitting an array of `IAdministrativeCenter` objects.
    */
   getAll(pageSize: number, pageNumber: number): Observable<any> {
     const headers = {
@@ -45,6 +45,7 @@ export class LevelService {
       pageSize: pageSize.toString(),
       pageNumber: pageNumber.toString()
     };
+
     return this.http.get(this.url, { headers: headers, params: params });
   }
 }

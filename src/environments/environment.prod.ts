@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  route: 'backend/api/v1/',
+  route: 'http://asone.udea.edu.co/siiu/backend',
   cookieToken: '$SuperSecret'
 };
