@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ENDPOINTS } from 'src/app/utils/url/endpoints-url';
+import { IProjectTypeDTO } from 'src/app/core/interfaces/IProjectTypeDTO';
 
 /**
  * Service class for managing operations related to project types.
@@ -16,7 +17,7 @@ import { ENDPOINTS } from 'src/app/utils/url/endpoints-url';
 })
 export class ProjectTypeService {
 
-  private url = `${environment.route}/${ENDPOINTS.SHARED_URL.PROJECT_TYPES_LIST}`;
+  private readonly url = `${environment.route}/${ENDPOINTS.V1.SHARED_URL.PROJECT_TYPES_LIST}`;
 
   /**
    * Constructor to inject the HttpClient dependency for performing HTTP requests.
@@ -25,26 +26,12 @@ export class ProjectTypeService {
    */
   constructor(private http: HttpClient) { }
 
-  /**
-   * Retrieves a paginated list of types from the API.
-   * 
-   * This method makes a GET request to the API with pagination parameters and custom headers.
-   * 
-   * @param pageSize - The number of types to retrieve per page.
-   * @param pageNumber - The page number to fetch.
-   * @returns An Observable that emits an array of `IType` objects.
-   */
-  getAll(pageSize: number, pageNumber: number): Observable<any> {
-    const headers = {
-      'message-uuid': '<uuid>',
-      'request-app-id': '<uuid>',
-      'Accept': 'application/json'
-    };
-    const params = {
-      pageSize: pageSize.toString(),
-      pageNumber: pageNumber.toString()
-    };
 
-    return this.http.get(this.url, { headers: headers, params: params });
+  getAll(skip: number, limit: number): Observable<IProjectTypeDTO[]> {
+    const params = new HttpParams()
+      .set('skip', skip.toString())
+      .set('limit', limit.toString());
+
+      return this.http.get<IProjectTypeDTO[]>(this.url, { params });
   }
 }

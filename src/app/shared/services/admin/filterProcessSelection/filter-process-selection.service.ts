@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FilterProcessSelectionService {
 
-  private url = `${environment.route}/${ENDPOINTS.ADMIN_URL.FILTER_PROCESS_SELECTION_LIST}`;
+  private url = `${environment.route}/${ENDPOINTS.V1.ADMIN_URL.FILTER_PROCESS_SELECTION_LIST}`;
 
   constructor(private http: HttpClient) { }
 

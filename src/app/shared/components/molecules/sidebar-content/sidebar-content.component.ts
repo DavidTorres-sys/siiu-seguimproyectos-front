@@ -1,17 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
-import { IAdministrativeCenter } from 'src/app/core/interfaces/IAdministrativeCenter';
-import { ILevel } from 'src/app/core/interfaces/ILevel';
-import { IProject } from 'src/app/core/interfaces/IProject';
-import { IState } from 'src/app/core/interfaces/IState';
-import { IType } from 'src/app/core/interfaces/IType';
-import { AdministrativeCenterService } from 'src/app/shared/services/shared/administrative-center/administrative-center.service';
 import { ProjectTypeService } from 'src/app/shared/services/shared/project-type/project-type.service';
-import { InputTextComponent } from '../../atoms/input-text/input-text.component';
+import { AdministrativeCenterService } from 'src/app/shared/services/shared/administrative-center/administrative-center.service';
 import { FilterProcessSelectionService } from 'src/app/shared/services/admin/filterProcessSelection/filter-process-selection.service';
 import { StatusByUserService } from 'src/app/shared/services/project/status/status-by-user.service';
 import { AnnouncementService } from 'src/app/shared/services/announcement/announcement/announcement.service';
+import { FilterService } from 'src/app/shared/services/project/filter/filter.service';
+import { ProjectDataService } from 'src/app/shared/services/project/project-data/project-data.service';
 
 @Component({
   selector: 'app-sidebar-content',
@@ -20,12 +16,7 @@ import { AnnouncementService } from 'src/app/shared/services/announcement/announ
 })
 export class SidebarContentComponent implements OnInit {
   form!: FormGroup;
-  projectTypeOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  administrativeCentersOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  filterProccessSelectionOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  announcementOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  statusByUserOptions$!: Observable<{ value: string | number; tag: string; }[]>;
-  typesOptions$!: Observable<{ value: string | number; tag: string; }[]>;
+  options$: { [key: string]: Observable<{ value: string | number; tag: string; }[]> } = {};
 
   constructor(
     private fb: FormBuilder,
@@ -34,70 +25,77 @@ export class SidebarContentComponent implements OnInit {
     private filterProcessSelectionSvc: FilterProcessSelectionService,
     private statusByUserSvc: StatusByUserService,
     private announcementSvc: AnnouncementService,
+    private filterService: FilterService,
+    private projectDataService: ProjectDataService
   ) {
+    this.initializeForm();
+  }
+
+  ngOnInit(): void {
+    this.loadOptions();
+  }
+
+  private initializeForm(): void {
     this.form = this.fb.group({
       projectCode: [''],
-      managementCenter: ['', Validators.required],
-      state: [''],
+      administrativeCenter: [null, Validators.required],
+      status: [''],
       announcement: [''],
       selectionProcess: [''],
       projectType: [''],
     });
   }
 
-  ngOnInit(): void {
-    this.projectTypeOptions$ = this.projectTypeSvc.getAll(100, 1).pipe(
-      map(response =>
-        response.map((level: any) => ({
-          value: level.id,
-          tag: level.name
-        }))
-      )
-    );
-    this.administrativeCentersOptions$ = this.administrativeCenterSvc.getAll(200, 200).pipe(
-      map(response =>
-        response.map((state: any) => ({
-          value: state.id,
-          tag: state.shortName
-        }))
-      )
-    );
-    this.announcementOptions$ = this.announcementSvc.getAll(100, 1).pipe(
-      map(response =>
-        response.map((type: any) => ({
-          value: type.id,
-          tag: type.name
-        }))
-      )
-    );
-    // this.filterProccessSelectionOptions$ = this.filterProcessSelectionSvc.getAll(100, 1).pipe(
-    //   map(response =>
-    //     response.map((type: any) => ({
-    //       value: type.id,
-    //       tag: type.name
-    //     }))
-    //   )
-    // );
-    // this.statusByUserOptions$ = this.statusByUserSvc.getAll(100, 1).pipe(
-    //   map(response =>
-    //     response.data.centrosAdministrativos.map((center: any) => ({
-    //       value: center.identificador,
-    //       tag: center.nombre
-    //     }))
-    //   )
-    // );
+  private loadOptions(): void {
+    this.options$ = {
+      projectType: this.fetchOptions(this.projectTypeSvc.getAll(0, 10), 'id', 'name'),
+      administrativeCenter: this.fetchOptions(this.administrativeCenterSvc.getAll(0, 200), 'id', 'shortName'),
+      announcement: this.fetchOptions(this.announcementSvc.getAll(0, 100), 'id', 'name'),
+      selectionProcess: this.fetchOptions(this.filterProcessSelectionSvc.getAll(100, 1), 'id', 'name'),
+      statusByUser: this.fetchOptions(this.statusByUserSvc.getAllByUser(0, 10), null, null, true),
+    };
   }
 
-  // Emit form values when CONSULTAR is clicked
+  private fetchOptions(
+    observable$: Observable<any[]>,
+    valueKey: string | null,
+    tagKey: string | null,
+    isDirectMapping: boolean = false
+  ): Observable<{ value: string | number; tag: string; }[]> {
+    return observable$.pipe(
+      map(response =>
+        response.map(item => ({
+          value: isDirectMapping ? item : item[valueKey!],
+          tag: isDirectMapping ? item : item[tagKey!]
+        }))
+      )
+    );
+  }
+
   onSubmit(): void {
     const formValues = this.form.value;
     console.log('Form submitted with values:', formValues);
 
-    // Optionally, emit the projectCode or the entire form values
-    const projectCode = formValues.projectCode;
+    this.filterService.filter(
+      0,
+      25,
+      formValues.administrativeCenter,
+      formValues.projectCode,
+      formValues.status,
+      formValues.announcement,
+      formValues.selectionProcess,
+      formValues.projectType
+    ).subscribe(
+      response => {
+        console.log('Filtered projects:', response);
+        this.projectDataService.setProjects(response);
+      },
+      error => {
+        console.error('Error fetching filtered projects', error);
+      }
+    );
   }
 
-  // Optional: Clear form filters when LIMPIAR FILTROS is clicked
   onClearFilters(): void {
     this.form.reset();
   }

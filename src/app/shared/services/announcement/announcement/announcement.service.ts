@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AnnouncementService {
 
-  private url = `${environment.route}/${ENDPOINTS.ANNOUNCEMENT_URL.ANNOUNCEMENT_LIST}`;
+  private readonly url = `${environment.route}/${ENDPOINTS.V1.ANNOUNCEMENT_URL.ANNOUNCEMENT_LIST}`;
 
   constructor(private http: HttpClient) { }
 

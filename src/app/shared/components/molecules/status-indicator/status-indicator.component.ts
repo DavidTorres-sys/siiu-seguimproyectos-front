@@ -8,8 +8,8 @@ import { Component, Input } from '@angular/core';
         Proyectos encontrados: <strong> {{ projectsNumber }} </strong>
       </p>
       <app-status [statuses]="[
-        { label: 'No aplica', icon: 'error', iconClass: 'danger' },
-        { label: 'Aplica', icon: 'check_circle', iconClass: 'success' }
+        { label: 'No aplica', icon: 'warning', iconClass: 'danger' },
+        { label: 'Aplica', icon: 'check', iconClass: 'success' }
       ]" />
     </div>
   `,

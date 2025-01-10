@@ -5,7 +5,9 @@ import { IMenuItem } from 'src/app/core/interfaces/IMenuItems';
   selector: 'app-menu',
   template: `
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Dynamic menu button">
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon>
+        more_horiz
+      </mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button

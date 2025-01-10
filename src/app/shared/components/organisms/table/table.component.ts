@@ -1,31 +1,7 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-
-// Temporal, mock data
-export interface PeriodicElement {
-  code: number;
-  project: string;
-  state: string;
-  calls: string;
-  responsable: string;
-  ip: string;
-  projectType: string;
-  actions: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [];
-for (let i = 1; i <= 80; i++) {
-  ELEMENT_DATA.push({
-    code: i,
-    project: `Project ${i}`,
-    state: ['Active', 'Inactive', 'Pending'][Math.floor(Math.random() * 3)],
-    calls: `Call ${i}`,
-    responsable: `Person ${String.fromCharCode(65 + (i % 26))}`, // This will cycle through A-Z
-    ip: `IP ${i}`,
-    projectType: `Type ${['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)]}`,
-    actions: '',
-  });
-}
+import { ProjectDataService } from 'src/app/shared/services/project/project-data/project-data.service';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -33,7 +9,7 @@ for (let i = 1; i <= 80; i++) {
 })
 export class TableComponent implements AfterViewInit {
   displayedColumns: string[] = ['code', 'project', 'state', 'calls', 'responsable', 'ip', 'projectType', 'actions'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -54,8 +30,17 @@ export class TableComponent implements AfterViewInit {
     return this.dataSource.data.length;
   }
 
+  constructor(private projectDataService: ProjectDataService) {}
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnInit() {
+    // Subscribe to the project data stream
+    this.projectDataService.projects$.subscribe(projects => {
+      this.dataSource.data = projects;
+    });
   }
 
   redial() {
