@@ -50,10 +50,11 @@ export class SidebarContentComponent implements OnInit {
     this.options$ = {
       projectType: this.fetchOptions(this.projectTypeSvc.getAll(0, 10), 'id', 'name'),
       administrativeCenter: this.fetchOptions(this.administrativeCenterSvc.getAll(0, 200), 'id', 'shortName'),
-      announcement: this.fetchOptions(this.announcementSvc.getAll(0, 100), 'id', 'name'),
-      selectionProcess: this.fetchOptions(this.filterProcessSelectionSvc.getAll(100, 1), 'id', 'name'),
+      announcement: this.fetchOptions(this.announcementSvc.getAll(0, 200), 'id', 'name'),
+      selectionProcess: this.fetchOptions(this.filterProcessSelectionSvc.getAll(0, 200), 'id', 'name'),
       statusByUser: this.fetchOptions(this.statusByUserSvc.getAllByUser(0, 10), null, null, true),
     };
+    console.log('Options:', this.options$);
   }
 
   private fetchOptions(

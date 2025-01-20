@@ -9,7 +9,7 @@ import { ENDPOINTS } from 'src/app/utils/url/endpoints-url';
 })
 export class FilterService {
 
-  private url = `${environment.route}/${ENDPOINTS.V1.PROJECT_URL.FILTER}`;
+  private readonly url = `${environment.route}/${ENDPOINTS.V1.PROJECT_URL.FILTER}`;
 
   constructor(private http: HttpClient) { }
 
