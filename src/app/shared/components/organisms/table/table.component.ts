@@ -10,28 +10,34 @@ import { IProject } from 'src/app/core/interfaces/IProject';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements AfterViewInit {
+
+  FORMAT_START_URL: string = 'tramitesadministrativos/seguimientoaproyectos/inicioformal';
   displayedColumns: string[] = ['code', 'project', 'state', 'calls', 'responsable', 'ip', 'projectType', 'actions'];
-  dataSource = new MatTableDataSource<IProject>([]);
+  projects = new MatTableDataSource<IProject[]>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
   get projectsNumber(): number {
-    return this.dataSource.data.length;
+    return this.projects.data.length;
   }
 
   constructor(
     private projectDataService: ProjectDataService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.projects.paginator = this.paginator;
   }
 
   ngOnInit() {
     this.projectDataService.projects$.subscribe((projects) => {
-      this.dataSource.data = projects.map((project) => ({
+      if (!projects) {
+        this.projects.data = [];
+        return;
+      }
+
+      this.projects.data = projects.map((project) => ({
         ...project,
         menuItems: [
           {
@@ -48,13 +54,10 @@ export class TableComponent implements AfterViewInit {
       }));
     });
   }
-  
 
   navegateToFormalStart(projectId: string) {
-    console.log('administrativos/seguimientoaproyectos/inicioformal', projectId);
-    this.router.navigate(['administrativos/seguimientoaproyectos/inicioformal', projectId]);
+    this.router.navigate([this.FORMAT_START_URL, projectId]);
   }
-  
 
   checkVoicemail() {
     console.log('Check voice mail clicked');
