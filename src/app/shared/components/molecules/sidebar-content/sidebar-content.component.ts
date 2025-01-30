@@ -54,7 +54,6 @@ export class SidebarContentComponent implements OnInit {
       selectionProcess: this.fetchOptions(this.filterProcessSelectionSvc.getAll(0, 200), 'id', 'name'),
       statusByUser: this.fetchOptions(this.statusByUserSvc.getAllByUser(0, 10), null, null, true),
     };
-    console.log('Options:', this.options$);
   }
 
   private fetchOptions(
@@ -75,7 +74,6 @@ export class SidebarContentComponent implements OnInit {
 
   onSubmit(): void {
     const formValues = this.form.value;
-    console.log('Form submitted with values:', formValues);
 
     this.filterService.filter(
       0,
@@ -88,7 +86,6 @@ export class SidebarContentComponent implements OnInit {
       formValues.projectType
     ).subscribe(
       response => {
-        console.log('Filtered projects:', response);
         this.projectDataService.setProjects(response);
       },
       error => {

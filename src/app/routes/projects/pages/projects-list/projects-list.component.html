@@ -1,6 +1,6 @@
 <div class="container">
-  <app-sidebar class="sidebar" />
-  <div class="content">
+  <app-sidebar class="sidebar" [class.open]="isSidebarOpen"></app-sidebar>
+  <div class="content" [class.shifted]="!isSidebarOpen">
     <h1>Busqueda proyectos</h1>
     <app-table class="table"></app-table>
   </div>

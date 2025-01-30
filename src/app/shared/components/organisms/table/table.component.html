@@ -1,5 +1,5 @@
 <div class="header">
-  <app-status-indicator [projectsNumber]="projectsNumber"/>
+  <app-status-indicator [projectsNumber]="projectsNumber" />
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -40,12 +40,12 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Acciones</th>
-    <app-menu mat-cell *matCellDef="let project" [menuItems]="menuItems" />
-  </ng-container>
+    <app-menu mat-cell *matCellDef="let project" [menuItems]="project.menuItems" />
+  </ng-container>  
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" />
-<app-footer></app-footer>
+<app-footer />

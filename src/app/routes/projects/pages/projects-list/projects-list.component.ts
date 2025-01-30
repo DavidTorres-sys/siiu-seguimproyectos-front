@@ -5,11 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './projects-list.component.html',
   styleUrls: ['./projects-list.component.scss']
 })
-export class ProjectsListComponent {
-  isDisabled = false;
+export class ProjectsListComponent { 
+  isSidebarOpen = false;
 
-  onSubmit() {
-    console.log('Button clicked!');
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
-  
 }

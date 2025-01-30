@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'projects',
+    path: 'administrativos',
     loadChildren: () => import('./routes/projects/projects.module').then(m => m.ProjectsModule),
   },
   {
     path: '**',
-    redirectTo: 'projects/list',
+    redirectTo: 'administrativos/seguimientoaproyectos',
   }
 ];
 

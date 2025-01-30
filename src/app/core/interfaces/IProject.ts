@@ -1,11 +1,11 @@
 export interface IProject {
-  codigo: string;
-  nombreProyecto: string;
-  nivel: string;
-  proyectoVinculado: string;
-  convocatoria: string;
-  responsable: string;
-  coordinador: string;
-  tipoProyecto: string;
-  estado: string;
+  code: string;
+  announcement: string;
+  ipCoordinator: string;
+  projectSubLevel: string;
+  projectSubtype: string;
+  responsible: string;
+  selectionProcess: string;
+  shortName: string;
+  status: string;
 }
