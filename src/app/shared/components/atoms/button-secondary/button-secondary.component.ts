@@ -25,6 +25,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       mat-raised-button 
       class="button-secondary"
       (click)="onClick()">
+      <mat-icon *ngIf="icon" class="icon">{{ icon }}</mat-icon>
       <span class="label">{{ label }}</span>
     </button>
   `,
@@ -36,6 +37,12 @@ export class ButtonSecondaryComponent {
    * Default: 'BUTTON'.
    */
   @Input() label: string = 'BUTTON';
+
+  /**
+   * The name of the Angular Material icon to display next to the label.
+   * This input is optional; if not provided, no icon will be shown.
+   */
+    @Input() icon: string = '';
 
   /**
    * Event emitted when the button is clicked.

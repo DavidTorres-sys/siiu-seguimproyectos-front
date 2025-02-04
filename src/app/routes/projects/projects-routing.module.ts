@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectsListComponent } from './pages/projects-list/projects-list.component';
-import { FormalStartComponent } from './pages/formal-start/formal-start.component';
+import { FormalStartPagesComponent } from './pages/formal-start-pages/formal-start-pages.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'seguimientoaproyectos/inicioformal/:id',
-    component: FormalStartComponent
+    component: FormalStartPagesComponent
   }
 ];
 

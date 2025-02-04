@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ProjectDataService } from 'src/app/shared/services/project/project-data/project-data.service';
 import { Router } from '@angular/router';
 import { IProject } from 'src/app/core/interfaces/IProject';
+import { ProjectSelectionService } from 'src/app/shared/services/project/project-selection/project-selection.service';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -24,6 +25,7 @@ export class TableComponent implements AfterViewInit {
   constructor(
     private projectDataService: ProjectDataService,
     private router: Router,
+    private projectSelectionService: ProjectSelectionService,
   ) { }
 
   ngAfterViewInit() {
@@ -43,7 +45,7 @@ export class TableComponent implements AfterViewInit {
           {
             icon: 'edit',
             label: 'Realizar inicio formal',
-            action: () => this.navegateToFormalStart(project.code),
+            action: () => this.navegateToFormalStart(project),
           },
           {
             icon: 'visibility',
@@ -55,8 +57,10 @@ export class TableComponent implements AfterViewInit {
     });
   }
 
-  navegateToFormalStart(projectId: string) {
-    this.router.navigate([this.FORMAT_START_URL, projectId]);
+  navegateToFormalStart(project: IProject) {
+    this.projectSelectionService.selectProject(project);
+    localStorage.setItem('selectedProject', JSON.stringify(project));
+    this.router.navigate([this.FORMAT_START_URL, project.code]);
   }
 
   checkVoicemail() {

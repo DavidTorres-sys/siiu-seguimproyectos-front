@@ -26,8 +26,4 @@ export class SidebarComponent implements OnInit {
   toggleDrawer(): void {
     this.drawerOpened = !this.drawerOpened;
   }
-
-  onSubmit() {
-    console.log('Button clicked!');
-  }
 }
