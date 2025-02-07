@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FormalStartGeneralInfoComponent } from '../formal-start-general-info/formal-start-general-info.component';
 
 @Component({
   selector: 'app-stepper',
@@ -22,7 +23,7 @@ export class StepperComponent {
       { 
         label: 'Información general', 
         formGroup: this._formBuilder.group({ infoCtrl: ['', Validators.required] }),
-        controlName: 'infoCtrl' 
+        component: FormalStartGeneralInfoComponent,
       },
       { 
         label: 'Participantes', 

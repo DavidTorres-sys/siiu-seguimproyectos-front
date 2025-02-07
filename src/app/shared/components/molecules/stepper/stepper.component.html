@@ -1,33 +1,25 @@
 <mat-stepper [linear]="isLinear" #stepper>
-  <mat-step *ngFor="let step of steps" [stepControl]="step.formGroup">
+  <mat-step *ngFor="let step of steps; let i = index" [stepControl]="step.formGroup">
     <form [formGroup]="step.formGroup">
       <ng-template matStepLabel>{{ step.label }}</ng-template>
+      <mat-card>
+        <mat-card-content>
+          <ng-container *ngComponentOutlet="step.component"></ng-container>
 
-      <mat-form-field>
-        <mat-label>{{ step.label }}</mat-label>
-        <input matInput [placeholder]="step.label" [formControlName]="step.controlName" required>
-      </mat-form-field>
+          <div class="form-buttons">
+            <app-button-secondary *ngIf="i > 0" [label]="'Anterior'" [icon]="'chevron_left'"
+              (clicked)="goToPreviousStep()" />
 
-      <div class="form-buttons">
-        <app-button-secondary 
-          *ngIf="steps.indexOf(step) > 0" 
-          [label]="'Anterior'" 
-          [icon]="'chevron_left'"
-          (clicked)="goToPreviousStep()" />
+            <app-button-primary *ngIf="i < steps.length - 1" [label]="'Siguiente'" [icon]="'assignment_turned_in'"
+              (clicked)="goToNextStep()" />
 
-        <app-button-primary 
-          *ngIf="steps.indexOf(step) < steps.length - 1" 
-          [label]="'Siguiente'"
-          [icon]="'assignment_turned_in'" 
-          (clicked)="goToNextStep()" />
+            <app-button-primary *ngIf="i === steps.length - 1" [label]="'Cerrar Inicio Formal'"
+              [icon]="'assignment_turned_in'" (clicked)="goToNextStep()" />
+          </div>
 
-        <app-button-primary 
-          *ngIf="steps.indexOf(step) === steps.length - 1"
-          [label]="'Cerrar Inicio Formal'" 
-          [icon]="'assignment_turned_in'" 
-          (clicked)="goToNextStep()" />
-      </div>
-      <app-footer />
+          <app-footer />
+        </mat-card-content>
+      </mat-card>
     </form>
   </mat-step>
 </mat-stepper>

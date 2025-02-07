@@ -5,11 +5,15 @@ import { MatIconModule } from '@angular/material/icon';;
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,6 +37,11 @@ import { StatusIndicatorComponent } from './components/molecules/status-indicato
 import { ProjectInfoFormalStartComponent } from './components/molecules/project-info-formal-start/project-info-formal-start.component';
 import { FormalStartComponent } from './components/organisms/formal-start/formal-start.component';
 import { StepperComponent } from './components/molecules/stepper/stepper.component';
+import { FormalStartGeneralInfoComponent } from './components/molecules/formal-start-general-info/formal-start-general-info.component';
+import { DatepickerComponent } from './components/atoms/datepicker/datepicker.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { SlideToggleComponent } from './components/atoms/slide-toggle/slide-toggle.component';
+import { CheckboxComponent } from './components/atoms/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -55,34 +64,43 @@ import { StepperComponent } from './components/molecules/stepper/stepper.compone
     ProjectInfoFormalStartComponent,
     FormalStartComponent,
     StepperComponent,
+    FormalStartGeneralInfoComponent,
+    DatepickerComponent,
+    SlideToggleComponent,
+    CheckboxComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     MatIconModule,
-    MatButtonModule, 
-    MatFormFieldModule, 
-    MatSelectModule, 
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatMenuModule,
-    NgFor, 
-    MatInputModule, 
+    NgFor,
+    MatInputModule,
     FormsModule,
     MatSidenavModule,
-    MatPaginatorModule, 
+    MatPaginatorModule,
     NgIf,
     MatCardModule,
     MatTableModule,
     ReactiveFormsModule,
     MatStepperModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatDividerModule,
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   exports: [
     MatIconModule,
     MatIconModule,
-    MatButtonModule, 
+    MatButtonModule,
     SidebarComponent,
     TableComponent,
     FooterComponent,
-    FormalStartComponent, 
+    FormalStartComponent,
   ]
 })
 export class SharedModule { }
