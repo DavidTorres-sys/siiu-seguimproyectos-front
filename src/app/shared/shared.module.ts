@@ -35,13 +35,13 @@ import { FooterComponent } from './components/molecules/footer/footer.component'
 import { StatusComponent } from './components/atoms/status/status.component';
 import { StatusIndicatorComponent } from './components/molecules/status-indicator/status-indicator.component';
 import { ProjectInfoFormalStartComponent } from './components/molecules/project-info-formal-start/project-info-formal-start.component';
-import { FormalStartComponent } from './components/organisms/formal-start/formal-start.component';
-import { StepperComponent } from './components/molecules/stepper/stepper.component';
 import { FormalStartGeneralInfoComponent } from './components/molecules/formal-start-general-info/formal-start-general-info.component';
 import { DatepickerComponent } from './components/atoms/datepicker/datepicker.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SlideToggleComponent } from './components/atoms/slide-toggle/slide-toggle.component';
 import { CheckboxComponent } from './components/atoms/checkbox/checkbox.component';
+import { GeneralInfoCardInfoComponent } from './components/molecules/general-info-card-info/general-info-card-info.component';
+import { StepperComponent } from './components/organisms/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -62,12 +62,12 @@ import { CheckboxComponent } from './components/atoms/checkbox/checkbox.componen
     StatusComponent,
     StatusIndicatorComponent,
     ProjectInfoFormalStartComponent,
-    FormalStartComponent,
     StepperComponent,
     FormalStartGeneralInfoComponent,
     DatepickerComponent,
     SlideToggleComponent,
     CheckboxComponent,
+    GeneralInfoCardInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -100,7 +100,8 @@ import { CheckboxComponent } from './components/atoms/checkbox/checkbox.componen
     SidebarComponent,
     TableComponent,
     FooterComponent,
-    FormalStartComponent,
+    StepperComponent,
+    ProjectInfoFormalStartComponent,
   ]
 })
 export class SharedModule { }

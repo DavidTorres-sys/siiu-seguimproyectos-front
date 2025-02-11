@@ -7,6 +7,7 @@
           <ng-container *ngComponentOutlet="step.component"></ng-container>
 
           <div class="form-buttons">
+            <app-general-info-card-info />
             <app-button-secondary *ngIf="i > 0" [label]="'Anterior'" [icon]="'chevron_left'"
               (clicked)="goToPreviousStep()" />
 
@@ -16,9 +17,8 @@
             <app-button-primary *ngIf="i === steps.length - 1" [label]="'Cerrar Inicio Formal'"
               [icon]="'assignment_turned_in'" (clicked)="goToNextStep()" />
           </div>
-
-          <app-footer />
         </mat-card-content>
+        <app-footer />
       </mat-card>
     </form>
   </mat-step>

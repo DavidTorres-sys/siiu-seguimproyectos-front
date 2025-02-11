@@ -30,44 +30,11 @@
   color: #6cb743;
 }
 
-::ng-deep .mat-step-header.mat-step-selected .mat-step-icon {
-  border-color: teal;
-  color: teal;
-}
-
-::ng-deep .mat-step-label {
-  margin-top: 8px;
-  font-size: 12px;
-  text-align: center;
-  white-space: nowrap;
-}
-
-::ng-deep .mat-horizontal-stepper-line {
-  border-top: 2px solid lightgray;
-  width: 100%;
-}
-
 ::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
   color: black;
   background-color: rgb(236, 236, 236);
   width: 2.5em;
   height: 2.5em;
-}
-
-::ng-deep .mat-stepper-horizontal .mat-step.mat-step-selected mat-form-field {
-  color: teal !important;
-}
-
-::ng-deep .mat-stepper-horizontal .mat-step.mat-step-selected mat-form-field .mat-form-field-outline {
-  border-color: teal !important;
-}
-
-::ng-deep .mat-stepper-horizontal .mat-step.mat-step-selected mat-form-field .mat-form-field-label {
-  color: teal !important;
-}
-
-::ng-deep .mat-stepper-horizontal .mat-step.mat-step-selected mat-form-field input {
-  color: teal !important;
 }
 
 form {

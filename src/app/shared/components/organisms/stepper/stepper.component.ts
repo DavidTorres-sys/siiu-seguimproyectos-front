@@ -1,7 +1,7 @@
-import { Component, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FormalStartGeneralInfoComponent } from '../formal-start-general-info/formal-start-general-info.component';
+import { FormalStartGeneralInfoComponent } from '../../molecules/formal-start-general-info/formal-start-general-info.component';
 
 @Component({
   selector: 'app-stepper',
