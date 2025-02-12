@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, Injector } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormalStartGeneralInfoComponent } from '../../molecules/formal-start-general-info/formal-start-general-info.component';
@@ -12,10 +12,23 @@ export class StepperComponent {
   isLinear = true;
   steps: any[] = [];
 
+  @Input() projectCode!: string;
+
   @ViewChild('stepper') stepper!: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(
+    private _formBuilder: FormBuilder, 
+    private injector: Injector) {}
+
+  ngOnInit() {
     this.initializeSteps();
+  }
+
+  createInjector(): Injector {
+    return Injector.create({
+      providers: [{ provide: 'projectCode', useValue: this.projectCode }],
+      parent: this.injector
+    });
   }
 
   initializeSteps() {
@@ -24,6 +37,7 @@ export class StepperComponent {
         label: 'Información general', 
         formGroup: this._formBuilder.group({ infoCtrl: ['', Validators.required] }),
         component: FormalStartGeneralInfoComponent,
+        injector: this.createInjector()
       },
       { 
         label: 'Participantes', 

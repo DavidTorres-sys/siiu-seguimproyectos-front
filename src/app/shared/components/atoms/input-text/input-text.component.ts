@@ -9,6 +9,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * 
  * Inputs:
  * - `label` (string): The label displayed next to the text input.
+ * - `readonly` (boolean): Whether the input is read-only.
  * 
  * Outputs:
  * - `selectionChange` (EventEmitter<string | number>): Emits the value of the input whenever it changes.
@@ -21,6 +22,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       <input 
         matInput
         [value]="value"
+        [readonly]="readonly"
         (input)="onInput($event)"
         (blur)="onTouched()"
       />
@@ -42,6 +44,11 @@ export class InputTextComponent implements ControlValueAccessor {
   @Input() label!: string;
 
   /**
+   * Determines if the input should be read-only.
+   */
+  @Input() readonly: boolean = false;
+
+  /**
    * Event emitted whenever the input value changes.
    */
   @Output() selectionChange = new EventEmitter<string | number>();
@@ -49,7 +56,7 @@ export class InputTextComponent implements ControlValueAccessor {
   /**
    * Internal value for the input field.
    */
-  value: string = '';
+  @Input() value: string = '';
 
   /**
    * Callbacks for ControlValueAccessor.
@@ -86,6 +93,7 @@ export class InputTextComponent implements ControlValueAccessor {
    * @param event The input event.
    */
   onInput(event: Event): void {
+    if (this.readonly) return;
     const value = (event.target as HTMLInputElement).value;
     this.value = value;
     this.onChange(value);

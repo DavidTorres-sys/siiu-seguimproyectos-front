@@ -4,7 +4,7 @@
       <ng-template matStepLabel>{{ step.label }}</ng-template>
       <mat-card>
         <mat-card-content>
-          <ng-container *ngComponentOutlet="step.component"></ng-container>
+          <ng-container *ngComponentOutlet="step.component; injector: step.injector"></ng-container>
 
           <div class="form-buttons">
             <app-general-info-card-info />

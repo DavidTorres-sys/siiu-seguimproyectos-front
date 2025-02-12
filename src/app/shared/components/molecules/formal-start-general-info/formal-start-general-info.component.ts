@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormalStartGeneralInfoComponent {
   form!: FormGroup;
   
-  constructor(private fb: FormBuilder) { 
+  constructor(
+    @Inject('projectCode') public projectCode: string,
+    private fb: FormBuilder) { 
     this.initializeForm();
   }
 
